@@ -12,10 +12,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   int _currentPage = 0;
 
   final List<Map<String, dynamic>> _pages = [
-    {"text": "Welcome to our App", "color": Color(0xFF56A0D3)}, // Soft Coral
-    {"text": "Get Started", "color": Color(0xFF9B82B0)},
-    {"text": "Explore Features", "color": Color(0xFF7AA3A3)}, // Sky Blue
-    {"text": "Stay Connected", "color": Color(0xFFD2851A)}, // Mellow Yellow
+    {"text": "Welcome to our App!", "color": Color(0xFF56A0D3)}, // Soft Coral
+    {"text": "Get Started!", "color": Color(0xFF9B82B0)},
+    {"text": "Explore App Features!", "color": Color(0xFF7AA3A3)}, // Sky Blue
+    {"text": "Stay Connected!", "color": Color(0xFFD2851A)}, // Mellow Yellow
   ];
 
   void _zoomToPage(BuildContext context, int pageIndex) {
