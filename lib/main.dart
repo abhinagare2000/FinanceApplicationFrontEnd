@@ -3,8 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'Pages/SelectionPages/account_selection_page.dart';
 import 'Pages/Component/ScrollablePages/mainScrollableViewPages.dart';
 
-void main() async{
-  await dotenv.load(fileName: ".env");
+void main(){
   runApp(const MyApp());
 }
 
@@ -50,7 +49,7 @@ class MyApp extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(20.0),
                 child: Image.asset(
-                  'assets/images/financeApp.webp',
+                  'assets/images/financeAppMod.png',
                   width: 300.0,
                   height: 300.0,
                   fit: BoxFit.cover,

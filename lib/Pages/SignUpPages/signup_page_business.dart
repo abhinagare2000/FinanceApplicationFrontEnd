@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import '../../Utils/loadFIleUtils.dart';
 
 String hashPassword(String password) {
   var bytes = utf8.encode(password);
@@ -47,7 +47,7 @@ class _SignupPageBusinessState extends State<SignupPageBusiness> {
       DateTime bDateOfIncorporation = DateTime.parse(_bDOIController.text);
       double bCapital = double.parse(_bCapitalController.text);
 
-      var url = Uri.parse('${dotenv.env['BASE_URL']}/createBusinessAccount');
+      var url = Uri.parse('http://localhost:8080/createBusinessAccount');
       var response = await http.post(
         url,
         headers: <String, String>{
