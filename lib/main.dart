@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'Pages/SelectionPages/account_selection_page.dart';
 import 'Pages/Component/ScrollablePages/mainScrollableViewPages.dart';
 
-void main() {
+void main() async{
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 String hashPassword(String password) {
   var bytes = utf8.encode(password);
@@ -22,13 +24,48 @@ class _SignUpPageUserState extends State<SignUpPageUser> {
   final TextEditingController _uPhoneController = TextEditingController();
   final TextEditingController _uAgeController = TextEditingController();
 
+  String _selectedCountry = 'India';
+  String _selectedCurrency = '₹';
+
+  final Map<String, List<String>> countryCurrencies = {
+    'India': ['₹'],
+    'USA': ['\$'],
+    'Europe': ['€'],
+    'UK': ['£'],
+    'Japan': ['¥'],
+  };
+
   Future<void> _signUp() async {
     try {
       String uEmail = _uEmailController.text;
       String uPassword = hashPassword(_uPasswordController.text);
       String uName = _uNameController.text;
       String uPhone = _uPhoneController.text;
-      String uAge = _uAgeController.text;
+      int uAge = int.parse(_uAgeController.text);
+
+      var url = Uri.parse('${dotenv.env['BASE_URL']}/createUserAccount');
+      var response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, dynamic>{
+          'uEmail': uEmail,
+          'uPassword': uPassword,
+          'uName': uName,
+          'uCountry': _selectedCountry,
+          'uCurrency': _selectedCurrency,
+          'uPhone': uPhone,
+          'uAge': uAge,
+        }),
+      );
+      if (response.statusCode == 200) {
+        // Handle success
+        print('Personal account created successfully');
+      } else {
+        // Handle error
+        print('Failed to create Personal account');
+      }
     } catch (e) {
       // Handle error
       print(e);
@@ -60,36 +97,79 @@ class _SignUpPageUserState extends State<SignUpPageUser> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            DropdownButton<String>(
+              value: _selectedCountry,
+              items: countryCurrencies.keys.map((String country) {
+                return DropdownMenuItem<String>(
+                  value: country,
+                  child: Text(country),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                setState(() {
+                  _selectedCountry = newValue!;
+                  _selectedCurrency = countryCurrencies[_selectedCountry]!.first;
+                });
+              },
+            ),
+            DropdownButton<String>(
+              value: _selectedCurrency,
+              items: countryCurrencies[_selectedCountry]!.map((String currency) {
+                return DropdownMenuItem<String>(
+                  value: currency,
+                  child: Text(currency),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                setState(() {
+                  _selectedCurrency = newValue!;
+                });
+              },
+            ),
             TextField(
               controller: _uEmailController,
-              decoration: const InputDecoration(labelText: 'Email'),
+              decoration: InputDecoration(
+                labelText: 'Email',
+                errorText: _uEmailController.text.isEmpty ? 'Email is required' : null,
+              ),
             ),
             TextField(
               controller: _uPasswordController,
-              decoration: const InputDecoration(labelText: 'Password'),
+              decoration: InputDecoration(
+                labelText: 'Password',
+                errorText: _uPasswordController.text.isEmpty ? 'Password is required' : null,
+              ),
               obscureText: true,
             ),
             TextField(
               controller: _uNameController,
-              decoration: const InputDecoration(labelText: 'Name'),
+              decoration: InputDecoration(
+                labelText: 'Name',
+                errorText: _uNameController.text.isEmpty ? 'Name is required' : null,
+              ),
               obscureText: true,
             ),
             TextField(
               controller: _uPhoneController,
-              decoration: const InputDecoration(labelText: 'Phone'),
+              decoration: InputDecoration(
+                labelText: 'Phone',
+                errorText: _uPhoneController.text.isEmpty ? 'Phone is required' : null,
+              ),
               keyboardType: TextInputType.number,
             ),
             TextField(
               controller: _uAgeController,
-              decoration: const InputDecoration(labelText: 'Age'),
+              decoration: InputDecoration(
+                labelText: 'Age in years',
+                errorText: _uAgeController.text.isEmpty ? 'Age is required' : null,
+              ),
               keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _signUp,
               style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    const Color(0xFFCEE5E4), // Set the background color
+                backgroundColor: const Color(0xFFCEE5E4), // Set the background color
               ),
               child: const Text(
                 'Sign Up',
