@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
-String hashPassword(String password) {
-  var bytes = utf8.encode(password);
-  var hashedPassword = sha256.convert(bytes).toString();
-  return hashedPassword;
-}
+import '../../Utils/validationUtils.dart';
 
 class SignUpPageUser extends StatefulWidget {
   const SignUpPageUser({super.key});
@@ -23,17 +18,6 @@ class _SignUpPageUserState extends State<SignUpPageUser> {
   final TextEditingController _uPhoneController = TextEditingController();
   final TextEditingController _uAgeController = TextEditingController();
 
-  String _selectedCountry = 'India';
-  String _selectedCurrency = '₹';
-
-  final Map<String, List<String>> countryCurrencies = {
-    'India': ['₹'],
-    'USA': ['\$'],
-    'Europe': ['€'],
-    'UK': ['£'],
-    'Japan': ['¥'],
-  };
-
   Future<void> _signUp() async {
     try {
       String uEmail = _uEmailController.text;
@@ -42,7 +26,7 @@ class _SignUpPageUserState extends State<SignUpPageUser> {
       String uPhone = _uPhoneController.text;
       int uAge = int.parse(_uAgeController.text);
 
-      var url = Uri.parse('http://localhost:8080/createUserAccount');
+      var url = Uri.parse('http://192.168.1.3:8080/createUserAccount');
       var response = await http.post(
         url,
         headers: <String, String>{
@@ -52,8 +36,8 @@ class _SignUpPageUserState extends State<SignUpPageUser> {
           'uEmail': uEmail,
           'uPassword': uPassword,
           'uName': uName,
-          'uCountry': _selectedCountry,
-          'uCurrency': _selectedCurrency,
+          'uCountry': "India",
+          'uCurrency': "₹",
           'uPhone': uPhone,
           'uAge': uAge,
         }),
@@ -78,107 +62,107 @@ class _SignUpPageUserState extends State<SignUpPageUser> {
         title: Text(
           'Personal Sign Up',
           style: TextStyle(
-            color: Color(0xFF05659C), // Text color
+            color: Colors.black, // Text color
             fontSize: 30, // Optional: Adjust font size
             fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color(0xFF05659C)),
+          icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            DropdownButton<String>(
-              value: _selectedCountry,
-              items: countryCurrencies.keys.map((String country) {
-                return DropdownMenuItem<String>(
-                  value: country,
-                  child: Text(country),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  _selectedCountry = newValue!;
-                  _selectedCurrency = countryCurrencies[_selectedCountry]!.first;
-                });
-              },
-            ),
-            DropdownButton<String>(
-              value: _selectedCurrency,
-              items: countryCurrencies[_selectedCountry]!.map((String currency) {
-                return DropdownMenuItem<String>(
-                  value: currency,
-                  child: Text(currency),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  _selectedCurrency = newValue!;
-                });
-              },
-            ),
-            TextField(
-              controller: _uEmailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
-                errorText: _uEmailController.text.isEmpty ? 'Email is required' : null,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              TextFormField(
+                controller: _uEmailController,
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  prefixIcon: Icon(Icons.email),
+                ),
+                validator: validateEmail,
               ),
-            ),
-            TextField(
-              controller: _uPasswordController,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                errorText: _uPasswordController.text.isEmpty ? 'Password is required' : null,
+              const SizedBox(height: 5),
+              TextFormField(
+                controller: _uPasswordController,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  prefixIcon: Icon(Icons.key),
+                ),
+                obscureText: true,
+                validator: validatePassword,
               ),
-              obscureText: true,
-            ),
-            TextField(
-              controller: _uNameController,
-              decoration: InputDecoration(
-                labelText: 'Name',
-                errorText: _uNameController.text.isEmpty ? 'Name is required' : null,
+              const SizedBox(height: 5),
+              TextFormField(
+                controller: _uNameController,
+                decoration: InputDecoration(
+                  labelText: 'Name',
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  prefixIcon: Icon(Icons.person),
+                ),
+                obscureText: true,
+                validator: validateName,
               ),
-              obscureText: true,
-            ),
-            TextField(
-              controller: _uPhoneController,
-              decoration: InputDecoration(
-                labelText: 'Phone',
-                errorText: _uPhoneController.text.isEmpty ? 'Phone is required' : null,
+              const SizedBox(height: 5),
+              TextFormField(
+                controller: _uPhoneController,
+                decoration: InputDecoration(
+                  labelText: 'Phone',
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  prefixIcon: Icon(Icons.phone),
+                ),
+                keyboardType: TextInputType.number,
+                validator: validatePhone,
               ),
-              keyboardType: TextInputType.number,
-            ),
-            TextField(
-              controller: _uAgeController,
-              decoration: InputDecoration(
-                labelText: 'Age in years',
-                errorText: _uAgeController.text.isEmpty ? 'Age is required' : null,
+              const SizedBox(height: 5),
+              TextFormField(
+                controller: _uAgeController,
+                decoration: InputDecoration(
+                  labelText: 'Age in years',
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  prefixIcon: Icon(Icons.cake),
+                ),
+                keyboardType: TextInputType.number,
+                validator: validateAge,
               ),
-              keyboardType: TextInputType.number,
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _signUp,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFCEE5E4), // Set the background color
-              ),
-              child: const Text(
-                'Sign Up',
-                style: TextStyle(
-                  color: Color(0xFF05659C), // Text color
-                  fontSize: 16.0, // Optional: Adjust font size
+              const SizedBox(height: 20),
+              SizedBox(
+                width: 400, // Set the desired width
+                child: ElevatedButton(
+                  onPressed: _signUp,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black, // Set the background color
+                  ),
+                  child: const Text(
+                    'Sign Up',
+                    style: TextStyle(
+                      color: Colors.white, // Text color
+                      fontSize: 16.0, // Optional: Adjust font size
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

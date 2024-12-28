@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:crypto/crypto.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../../Utils/loadFIleUtils.dart';
-
-String hashPassword(String password) {
-  var bytes = utf8.encode(password);
-  var hashedPassword = sha256.convert(bytes).toString();
-  return hashedPassword;
-}
+import '../../Utils/validationUtils.dart';
 
 class SignupPageBusiness extends StatefulWidget {
   const SignupPageBusiness({super.key});
@@ -26,17 +19,6 @@ class _SignupPageBusinessState extends State<SignupPageBusiness> {
   final TextEditingController _bDOIController = TextEditingController();
   final TextEditingController _bCapitalController = TextEditingController();
 
-  String _selectedCountry = 'India';
-  String _selectedCurrency = '₹';
-
-  final Map<String, List<String>> countryCurrencies = {
-    'India': ['₹'],
-    'USA': ['\$'],
-    'Europe': ['€'],
-    'UK': ['£'],
-    'Japan': ['¥'],
-  };
-
   Future<void> _signUp() async {
     try {
       String bEmail = _bEmailController.text;
@@ -47,7 +29,7 @@ class _SignupPageBusinessState extends State<SignupPageBusiness> {
       DateTime bDateOfIncorporation = DateTime.parse(_bDOIController.text);
       double bCapital = double.parse(_bCapitalController.text);
 
-      var url = Uri.parse('http://localhost:8080/createBusinessAccount');
+      var url = Uri.parse('http://192.168.1.3:8080/createBusinessAccount');
       var response = await http.post(
         url,
         headers: <String, String>{
@@ -57,8 +39,8 @@ class _SignupPageBusinessState extends State<SignupPageBusiness> {
           'bEmail': bEmail,
           'bPassword': bPassword,
           'bName': bName,
-          'bCountry': _selectedCountry,
-          'bCurrency': _selectedCurrency,
+          'bCountry': "India",
+          'bCurrency': "₹",
           'bPhone': bPhone,
           'bType': bType,
           'bDateOfIncorporation': bDateOfIncorporation.toIso8601String(),
@@ -85,124 +67,135 @@ class _SignupPageBusinessState extends State<SignupPageBusiness> {
         title: Text(
           'Business Sign Up',
           style: TextStyle(
-            color: Color(0xFF05659C), // Text color
+            color: Colors.black, // Text color
             fontSize: 30, // Optional: Adjust font size
             fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color(0xFF05659C)),
+          icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
+        child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            DropdownButton<String>(
-              value: _selectedCountry,
-              items: countryCurrencies.keys.map((String country) {
-                return DropdownMenuItem<String>(
-                  value: country,
-                  child: Text(country),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  _selectedCountry = newValue!;
-                  _selectedCurrency = countryCurrencies[_selectedCountry]!.first;
-                });
-              },
-            ),
-            DropdownButton<String>(
-              value: _selectedCurrency,
-              items: countryCurrencies[_selectedCountry]!.map((String currency) {
-                return DropdownMenuItem<String>(
-                  value: currency,
-                  child: Text(currency),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  _selectedCurrency = newValue!;
-                });
-              },
-            ),
-            TextField(
+            TextFormField(
               controller: _bEmailController,
               decoration: InputDecoration(
                 labelText: 'Email',
-                errorText: _bEmailController.text.isEmpty ? 'Email is required' : null,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                prefixIcon: Icon(Icons.email),
               ),
+              validator: validateEmail,
             ),
-            TextField(
+            const SizedBox(height: 5),
+            TextFormField(
               controller: _bPasswordController,
               decoration: InputDecoration(
                 labelText: 'Password',
-                errorText: _bPasswordController.text.isEmpty ? 'Password is required' : null,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                prefixIcon: Icon(Icons.key),
               ),
               obscureText: true,
+              validator: validatePassword,
             ),
-            TextField(
+            const SizedBox(height: 5),
+            TextFormField(
               controller: _bNameController,
               decoration: InputDecoration(
                 labelText: 'Business Name',
-                errorText: _bNameController.text.isEmpty ? 'Business Name is required' : null,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                prefixIcon: Icon(Icons.business),
               ),
               obscureText: true,
+              validator: validateBusinessName,
             ),
-            TextField(
+            const SizedBox(height: 5),
+            TextFormField(
               controller: _bPhoneController,
               decoration: InputDecoration(
                 labelText: 'Phone',
-                errorText: _bPhoneController.text.isEmpty ? 'Phone is required' : null,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                prefixIcon: Icon(Icons.phone),
               ),
               keyboardType: TextInputType.number,
+              validator: validatePhone,
             ),
-            TextField(
+            const SizedBox(height: 5),
+            TextFormField(
               controller: _bTypeController,
               decoration: InputDecoration(
                 labelText: 'Business Type',
-                errorText: _bTypeController.text.isEmpty ? 'Business Type is required' : null,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                prefixIcon: Icon(Icons.business_center),
               ),
               obscureText: true,
+              validator: validateBusinessType,
             ),
-            TextField(
+            const SizedBox(height: 5),
+            TextFormField(
               controller: _bDOIController,
               decoration: const InputDecoration(
                 labelText: 'Business Date of Incorporation',
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
                 hintText: 'YYYY-MM-DD',
+                prefixIcon: Icon(Icons.date_range),
               ),
               keyboardType: TextInputType.datetime,
+              validator: validateDOI,
             ),
-            TextField(
+            const SizedBox(height: 5),
+            TextFormField(
               controller: _bCapitalController,
               decoration: InputDecoration(
                 labelText: 'Business Capital',
-                prefixText: _selectedCurrency,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                prefixIcon: Icon(Icons.currency_rupee),
               ),
               keyboardType: TextInputType.number,
+              validator: validateCapital,
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _signUp,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFCEE5E4), // Set the background color
-              ),
-              child: const Text(
-                'Sign Up',
-                style: TextStyle(
-                  color: Color(0xFF05659C), // Text color
-                  fontSize: 16.0, // Optional: Adjust font size
+            SizedBox(
+              width: 400, // Set the desired width
+              child: ElevatedButton(
+                onPressed: _signUp,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black, // Set the background color
+                ),
+                child: const Text(
+                  'Sign Up',
+                  style: TextStyle(
+                    color: Colors.white, // Text color
+                    fontSize: 16.0, // Optional: Adjust font size
+                  ),
                 ),
               ),
             ),
           ],
         ),
+      ),
       ),
     );
   }

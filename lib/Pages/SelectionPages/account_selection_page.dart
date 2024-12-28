@@ -18,8 +18,9 @@ class _AccountSelectionPageState extends State<AccountSelectionPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Flexible(
-              child: Column(
+              child: Row(
                 children: <Widget>[
+                  const SizedBox(width: 20),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
@@ -28,17 +29,22 @@ class _AccountSelectionPageState extends State<AccountSelectionPage> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFCEE5E4), // Set the background color
+                      backgroundColor: Colors.white, // Set the background color
+                      side: const BorderSide(color: Colors.black), // Set the border color
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0), // Slightly rounded corners
+                      ),
+                      padding: const EdgeInsets.all(16.0),
                     ),
                     child: const Text(
                       'Personal Account',
                       style: TextStyle(
-                        color: Color(0xFF05659C), // Text color
-                        fontSize: 20.0, // Optional: Adjust font size
+                        color: Colors.black, // Text color
+                        fontSize: 16.0, // Optional: Adjust font size
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(width: 20),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
@@ -47,13 +53,17 @@ class _AccountSelectionPageState extends State<AccountSelectionPage> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFCEE5E4), // Set the background color
+                      backgroundColor: Colors.black, // Set the background color
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0), // Slightly rounded corners
+                      ),
+                      padding: const EdgeInsets.all(16.0),
                     ),
                     child: const Text(
                       'Business Account',
                       style: TextStyle(
-                        color: Color(0xFF05659C), // Text color
-                        fontSize: 20.0, // Optional: Adjust font size
+                        color: Colors.white, // Text color
+                        fontSize: 16, // Optional: Adjust font size
                       ),
                     ),
                   ),

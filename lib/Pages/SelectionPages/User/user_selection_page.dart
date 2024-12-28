@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../SignUpPages/signup_page_user.dart';
-import '../../LoginPages/login_page_user.dart';
+import '../../LoginPages/MobilePages/login_page_user_mobile.dart';
 
 class UserSelectionPage extends StatefulWidget {
   const UserSelectionPage({super.key});
@@ -16,17 +15,24 @@ class _UserSelectionPageState extends State<UserSelectionPage> {
         title: Text(
           'Personal Account',
           style: TextStyle(
-            color: Color(0xFF05659C), // Text color
+            color: Colors.black, // Text color
             fontSize: 30, // Optional: Adjust font size
             fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color(0xFF05659C)),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+        leading: Positioned(
+          bottom: 30,
+          left: 10,
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            style: ButtonStyle(
+              shape: WidgetStateProperty.all(const CircleBorder()),
+            ),
+          ),
         ),
       ),
       body: Center(
@@ -34,7 +40,7 @@ class _UserSelectionPageState extends State<UserSelectionPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Flexible(
-              child: LoginPageUser(),
+              child: LoginPageUserMobile(),
               ),
           ],
         ),

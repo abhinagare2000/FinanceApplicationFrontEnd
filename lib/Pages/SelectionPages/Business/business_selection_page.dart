@@ -1,7 +1,5 @@
-import 'package:financeapplication1/Pages/LoginPages/login_page_business.dart';
 import 'package:flutter/material.dart';
-import '../../SignUpPages/signup_page_business.dart';
-import '../../LoginPages/login_page_business.dart';
+import '../../LoginPages/MobilePages/login_page_business_mobile.dart';
 
 class BusinessSelectionPage extends StatefulWidget {
   const BusinessSelectionPage({super.key});
@@ -17,29 +15,34 @@ class _BusinessSelectionPageState extends State<BusinessSelectionPage> {
         title: Text(
           'Business Account',
           style: TextStyle(
-            color: Color(0xFF05659C), // Text color
+            color: Colors.black, // Text color
             fontSize: 30, // Optional: Adjust font size
             fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color(0xFF05659C)),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+        leading: Positioned(
+          bottom: 40,
+          left: 20,
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            style: ButtonStyle(
+              shape: WidgetStateProperty.all(const CircleBorder()),
+            ),
+          ),
         ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Flexible(
-              child: LoginPageBusiness(),
+              child: LoginPageBusinessMobile(),
             ),
           ],
         ),
-      ),
     );
   }
 }

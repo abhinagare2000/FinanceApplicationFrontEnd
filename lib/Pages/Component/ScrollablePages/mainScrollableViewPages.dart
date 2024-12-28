@@ -12,10 +12,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   int _currentPage = 0;
 
   final List<Map<String, dynamic>> _pages = [
-    {"text": "Welcome to our App!", "color": Color(0xFF56A0D3)}, // Soft Coral
-    {"text": "Get Started!", "color": Color(0xFF9B82B0)},
-    {"text": "Explore App Features!", "color": Color(0xFF7AA3A3)}, // Sky Blue
-    {"text": "Stay Connected!", "color": Color(0xFFD2851A)}, // Mellow Yellow
+    {"image": "assets/images/financeAppMainPages1.png", "color": Color(0xFF56A0D3)},
+    {"image": "assets/images/financeAppMainPages2.png", "color": Color(0xFF9B82B0)},
   ];
 
   void _zoomToPage(BuildContext context, int pageIndex) {
@@ -31,8 +29,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       if (updatedPageIndex != null) {
         setState(() {
           _currentPage = updatedPageIndex;
-          _pageController
-              .jumpToPage(_currentPage); // Scroll to the correct page
+          _pageController.jumpToPage(_currentPage);
         });
       }
     });
@@ -43,52 +40,39 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          Padding(
-              padding: const EdgeInsets.only(left: 50, right: 50, bottom: 20),
-              child: PageView.builder(
-                controller: _pageController,
-                itemCount: _pages.length,
-                onPageChanged: (index) {
-                  setState(() {
-                    _currentPage = index;
-                  });
-                },
-                itemBuilder: (context, index) {
-                  final page = _pages[index];
-                  return GestureDetector(
-                    onTap: () => _zoomToPage(context, index),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0), // Set the radius here
-                      child: Container(
-                        color: page['color'],
-                        child: Center(
-                          child: Text(
-                            page['text'],
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              )),
+          PageView.builder(
+            controller: _pageController,
+            itemCount: _pages.length,
+            onPageChanged: (index) {
+              setState(() {
+                _currentPage = index;
+              });
+            },
+            itemBuilder: (context, index) {
+              final page = _pages[index];
+              return GestureDetector(
+                onTap: () => _zoomToPage(context, index),
+                child: ClipRRect(
+                  child: Image.asset(
+                      page['image'],
+                      fit: BoxFit.contain,
+                  ),
+                ),
+              );
+            },
+          ),
           Positioned(
-            bottom: 40,
+            bottom: 10,
             left: 0,
             right: 0,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
                 _pages.length,
-                (index) => AnimatedContainer(
+                    (index) => AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
                   margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                  height: 12.0,
+                  height: 8.0,
                   width: _currentPage == index ? 24.0 : 12.0,
                   decoration: BoxDecoration(
                     color: _currentPage == index ? Colors.black : Colors.grey,
@@ -144,51 +128,38 @@ class _ZoomPageState extends State<ZoomPage> {
             },
             itemBuilder: (context, index) {
               final page = widget.pages[index];
-              return Container(
-                color: page['color'],
-                child: Center(
-                  child: Text(
-                    page['text'],
-                    style: const TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              );
+              return Image.asset(
+                  page['image'],
+                  fit: BoxFit.contain,
+                );
             },
           ),
-          // Back button (with round frame)
           Positioned(
-            bottom: 50,
-            left: 16,
+            bottom: 40,
+            left: 20,
             child: IconButton(
               icon: const Icon(Icons.arrow_back, color: Colors.black),
               onPressed: () {
-                Navigator.pop(context,
-                    _currentPage); // Return the current page index to OnboardingScreen
+                Navigator.pop(context, _currentPage);
               },
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.white),
-                shape: MaterialStateProperty.all(const CircleBorder()),
+                backgroundColor: WidgetStateProperty.all(Colors.white),
+                shape: WidgetStateProperty.all(const CircleBorder()),
               ),
             ),
           ),
-          // Page indicators
           Positioned(
-            bottom: 20,
+            bottom: 60,
             left: 0,
             right: 0,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
                 widget.pages.length,
-                (index) => AnimatedContainer(
+                    (index) => AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
                   margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                  height: 12.0,
+                  height: 8.0,
                   width: _currentPage == index ? 24.0 : 12.0,
                   decoration: BoxDecoration(
                     color: _currentPage == index ? Colors.black : Colors.grey,

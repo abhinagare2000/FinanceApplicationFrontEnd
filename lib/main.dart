@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'Pages/SelectionPages/account_selection_page.dart';
 import 'Pages/Component/ScrollablePages/mainScrollableViewPages.dart';
 
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
           primary: Colors.teal, // A calming teal as the primary color
           secondary: Colors.orangeAccent, // A vibrant orange for highlights
           surface: const Color(
-              0xFFbcd9db), // Clean and simple for card backgrounds// A subtle off-white for app background
+              0xFFece6f0), // Clean and simple for card backgrounds// A subtle off-white for app background
           error: Colors.redAccent, // A bright red for error messages
           onPrimary:
               Colors.white, // Text on primary should be white for contrast
@@ -28,40 +27,19 @@ class MyApp extends StatelessWidget {
           onError: Colors.white, // White text on error backgrounds
           brightness: Brightness.light, // A light theme overall
         ),
-        textTheme: const TextTheme(
-          displayLarge: TextStyle(
-            fontSize: 32.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.blueGrey,
-          ),
-          bodyLarge: TextStyle(
-            fontSize: 16.0,
-            color: Colors.black,
-          ),
-        ),
       ),
       home: Scaffold(
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 20),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20.0),
-                child: Image.asset(
-                  'assets/images/financeAppMod.png',
-                  width: 300.0,
-                  height: 300.0,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              const SizedBox(height: 30),
-              Container(
-                height: 160.0,  // Set the desired height
-                child: const AccountSelectionPage(),
-              ),
               Flexible(
                 child: OnboardingScreen(),
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                height: 80.0,  // Set the desired height
+                child: const AccountSelectionPage(),
               ),
             ],
           ),
