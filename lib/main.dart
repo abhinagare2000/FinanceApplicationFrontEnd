@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'Pages/AccountPages/PersonalAccountPages/ClubPages.dart';
+import 'Pages/AccountPages/PersonalAccountPages/InsightPage.dart';
+import 'Pages/AccountPages/PersonalAccountPages/InvestPage.dart';
 import 'Pages/SelectionPages/account_selection_page.dart';
 import 'Pages/Component/ScrollablePages/mainScrollableViewPages.dart';
 
@@ -16,8 +19,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal).copyWith(
           primary: Colors.teal, // A calming teal as the primary color
           secondary: Colors.orangeAccent, // A vibrant orange for highlights
-          surface: const Color(
-              0xFFece6f0), // Clean and simple for card backgrounds// A subtle off-white for app background
+          // surface: const Color(
+          //     0xFFece6f0), // Clean and simple for card backgrounds// A subtle off-white for app background
+          surface: Colors.grey.shade200,
           error: Colors.redAccent, // A bright red for error messages
           onPrimary:
               Colors.white, // Text on primary should be white for contrast
@@ -28,23 +32,24 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.light, // A light theme overall
         ),
       ),
-      home: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Flexible(
-                child: OnboardingScreen(),
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
-                height: 80.0,  // Set the desired height
-                child: const AccountSelectionPage(),
-              ),
-            ],
-          ),
-        ),
-      ),
+      // home: Scaffold(
+      //   body: Center(
+      //     child: Column(
+      //       mainAxisAlignment: MainAxisAlignment.center,
+      //       children: [
+      //         Flexible(
+      //           child: OnboardingScreen(),
+      //         ),
+      //         const SizedBox(height: 20),
+      //         SizedBox(
+      //           height: 80.0,  // Set the desired height
+      //           child: const AccountSelectionPage(),
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
+      home: ClubPages(),
     );
   }
 }

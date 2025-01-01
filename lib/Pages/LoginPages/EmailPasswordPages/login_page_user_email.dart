@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
+import '../../AccountPages/PersonalAccountPages/ClubPages.dart';
 import '../../SignUpPages/signup_page_user.dart';
 import '../../../Utils/validationUtils.dart';
 import 'package:http/http.dart' as http;
@@ -47,6 +48,7 @@ class _LoginPageUserEmailState extends State<LoginPageUserEmail> {
             const SnackBar(
                 content: Text('Email & Password Verified Successfully!')),
           );
+          ClubPages();
         } else {
           // Handle error
           ScaffoldMessenger.of(context).showSnackBar(

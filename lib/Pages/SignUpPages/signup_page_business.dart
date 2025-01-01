@@ -2,6 +2,25 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../../Utils/validationUtils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class UserPreferences {
+  static Future<void> saveUserDetails(int uId, int nbfcId, int nbfcP2PId) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('uId', uId);
+    await prefs.setInt('nbfcId', "");
+    await prefs.setInt('nbfcP2PId', nbfcP2PId);
+  }
+
+  static Future<Map<String, int?>> getUserDetails() async {
+    final prefs = await SharedPreferences.getInstance();
+    return {
+      'uId': prefs.getInt('uId'),
+      'nbfcId': prefs.getInt('nbfcId'),
+      'nbfcP2PId': prefs.getInt('nbfcP2PId'),
+    };
+  }
+}
 
 class SignupPageBusiness extends StatefulWidget {
   const SignupPageBusiness({super.key});
@@ -48,6 +67,7 @@ class _SignupPageBusinessState extends State<SignupPageBusiness> {
         }),
       );
       if (response.statusCode == 200) {
+
         // Handle success
         print('Business account created successfully');
       } else {
