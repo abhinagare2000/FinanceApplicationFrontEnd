@@ -8,7 +8,7 @@ class UserPreferences {
   static Future<void> saveUserDetails(int uId, int nbfcId, int nbfcP2PId) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('uId', uId);
-    await prefs.setInt('nbfcId', "");
+    await prefs.setInt('nbfcId', nbfcId);
     await prefs.setInt('nbfcP2PId', nbfcP2PId);
   }
 
