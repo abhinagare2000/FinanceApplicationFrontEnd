@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
+import '../../../Themes/appTheme.dart';
 import '../../AccountPages/PersonalAccountPages/ClubPages.dart';
 import '../../SignUpPages/signup_page_user.dart';
 import '../../../Utils/validationUtils.dart';
@@ -77,7 +78,7 @@ class _LoginPageUserEmailState extends State<LoginPageUserEmail> {
         title: Text(
           'Personal Account',
           style: TextStyle(
-            color: Colors.black, // Text color
+            color: AppTheme.primaryColor, // Text color
             fontSize: 30, // Optional: Adjust font size
             fontWeight: FontWeight.bold,
           ),
@@ -123,7 +124,7 @@ class _LoginPageUserEmailState extends State<LoginPageUserEmail> {
                 labelText: 'Email',
                 prefixIcon: Icon(Icons.email),
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: BorderSide(color: AppTheme.primaryColor),
                 ),
               ),
               validator: validateEmail,
@@ -146,7 +147,7 @@ class _LoginPageUserEmailState extends State<LoginPageUserEmail> {
                   },
                 ),
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: BorderSide(color: AppTheme.primaryColor),
                 ),
               ),
               validator: validatePassword,
@@ -157,7 +158,7 @@ class _LoginPageUserEmailState extends State<LoginPageUserEmail> {
               child: ElevatedButton(
                 onPressed: _login,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black, // Set the background color
+                  backgroundColor: AppTheme.primaryColor, // Set the background color
                 ),
                 child: const Text(
                   'Login',
@@ -183,7 +184,7 @@ class _LoginPageUserEmailState extends State<LoginPageUserEmail> {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
-                  Colors.black, // Set the background color
+                  AppTheme.primaryColor, // Set the background color
                 ),
                 child: const Text(
                   "Sign Up",

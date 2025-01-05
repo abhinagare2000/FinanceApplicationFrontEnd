@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import '../../../Themes/appTheme.dart';
 import '../OtpPages/OtpPageBusiness.dart';
 import '../../SignUpPages/signup_page_user.dart';
 import '../../LoginPages/EmailPasswordPages/login_page_user_email.dart';
@@ -88,7 +89,7 @@ class _LoginPageUserMobileState extends State<LoginPageUserMobile> {
               decoration: const InputDecoration(
                 labelText: 'Mobile Number',
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: BorderSide(color: AppTheme.primaryColor),
                 ),
                 prefixIcon: Icon(Icons.phone),
               ),
@@ -101,7 +102,7 @@ class _LoginPageUserMobileState extends State<LoginPageUserMobile> {
               child: ElevatedButton(
                 onPressed: _login,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black, // Set the background color
+                  backgroundColor: AppTheme.primaryColor, // Set the background color
                   shape: RoundedRectangleBorder(
                     borderRadius:
                     BorderRadius.circular(8.0), // Slightly rounded corners
@@ -128,7 +129,7 @@ class _LoginPageUserMobileState extends State<LoginPageUserMobile> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black, // Set the background color
+                  backgroundColor: AppTheme.primaryColor, // Set the background color
                   shape: RoundedRectangleBorder(
                     borderRadius:
                     BorderRadius.circular(8.0), // Slightly rounded corners
@@ -156,7 +157,7 @@ class _LoginPageUserMobileState extends State<LoginPageUserMobile> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black, // Set the background color
+                  backgroundColor: AppTheme.primaryColor, // Set the background color
                   shape: RoundedRectangleBorder(
                     borderRadius:
                     BorderRadius.circular(8.0), // Slightly rounded corners

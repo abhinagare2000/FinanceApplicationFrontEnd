@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../Themes/appTheme.dart';
 import 'HomePage.dart';
 import 'InsightPage.dart';
-import 'InvestPage.dart';
+import 'BorrowPage.dart';
 import 'PortfolioPage.dart';
 import 'ProfilePage.dart';
 
@@ -23,7 +23,7 @@ class _ClubPagesState extends State<ClubPages> {
     super.initState();
     _pages = [
       HomeScreen(),
-      InvestScreen(),
+      BorrowScreen(),
       PortfolioScreen(),
       InsightsScreen(),
       ProfileScreen(),
@@ -63,7 +63,7 @@ class _ClubPagesState extends State<ClubPages> {
           ),
           items: [
             _buildNavItem(Icons.home, 'Home', 0),
-            _buildNavItem(Icons.percent, 'Invest', 1),
+            _buildNavItem(Icons.percent, 'Borrow', 1),
             _buildNavItem(Icons.inventory_sharp, 'Portfolio', 2),
             _buildNavItem(Icons.insights_sharp, 'Insights', 3),
             _buildNavItem(Icons.person_outline, 'Profile', 4),

@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'Borrowing/BusinessLoanApplicationPage.dart';
-import 'Borrowing/CrowdFundingApplicationPage.dart';
-import 'Borrowing/InvoiceDiscountingApplicationPage.dart';
-import 'Borrowing/NCDApplicationPage.dart';
-
-class BorrowScreen extends StatelessWidget {
-  const BorrowScreen({super.key});
+class PortfolioScreen extends StatelessWidget {
+  const PortfolioScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Borrow'),
+        title: const Text('Borrowing Portfolio'),
         backgroundColor: Color(0xFF264653),
       ),
       body: Padding(
@@ -20,7 +15,7 @@ class BorrowScreen extends StatelessWidget {
         child: ListView(
           children: [
             const Text(
-              'Borrowing Options',
+              'Your Borrowings',
               style: TextStyle(
                 color: Color(0xFF264653),
                 fontSize: 24,
@@ -31,16 +26,16 @@ class BorrowScreen extends StatelessWidget {
             BorrowingCategory(
               category: 'NBFC',
               borrowings: [
-                BorrowingOption('Business Loan', 'Apply for a business loan', BusinessLoanApplicationPage()),
-                BorrowingOption('Invoice Discounting', 'Apply for invoice discounting', InvoiceDiscountingApplicationPage()),
-                BorrowingOption('NCDs', 'Apply for NCDs', NCDApplicationPage()),
+                BorrowingData('Business Loan', '₹500,000'),
+                BorrowingData('Invoice Discounting', '₹300,000'),
+                BorrowingData('NCDs', '₹200,000'),
               ],
             ),
             BorrowingCategory(
               category: 'NBFCP2P',
               borrowings: [
-                BorrowingOption('Crowd Funding', 'Apply for crowd funding', CrowdFundingApplicationPage()),
-                BorrowingOption('Invoice Discounting', 'Apply for invoice discounting', InvoiceDiscountingApplicationPage()),
+                BorrowingData('Crowd Funding', '₹150,000'),
+                BorrowingData('Invoice Discounting', '₹100,000'),
               ],
             ),
           ],
@@ -52,7 +47,7 @@ class BorrowScreen extends StatelessWidget {
 
 class BorrowingCategory extends StatelessWidget {
   final String category;
-  final List<BorrowingOption> borrowings;
+  final List<BorrowingData> borrowings;
 
   const BorrowingCategory({
     Key? key,
@@ -84,14 +79,25 @@ class BorrowingCategory extends StatelessWidget {
             const SizedBox(height: 8),
             ...borrowings.map((borrowing) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 4.0),
-              child: ListTile(
-                title: Text(borrowing.name),
-                subtitle: Text(borrowing.description),
-                trailing: Icon(Icons.chevron_right),
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => borrowing.page),
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    borrowing.name,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text(
+                    borrowing.amount,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
               ),
             )),
           ],
@@ -101,10 +107,9 @@ class BorrowingCategory extends StatelessWidget {
   }
 }
 
-class BorrowingOption {
+class BorrowingData {
   final String name;
-  final String description;
-  final Widget page;
+  final String amount;
 
-  BorrowingOption(this.name, this.description, this.page);
+  BorrowingData(this.name, this.amount);
 }

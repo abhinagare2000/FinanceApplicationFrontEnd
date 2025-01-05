@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import '../../Themes/appTheme.dart';
 import '../../Utils/validationUtils.dart';
 
 class SignUpPageUser extends StatefulWidget {
@@ -62,7 +63,7 @@ class _SignUpPageUserState extends State<SignUpPageUser> {
         title: Text(
           'Personal Sign Up',
           style: TextStyle(
-            color: Colors.black, // Text color
+            color: AppTheme.primaryColor, // Text color
             fontSize: 30, // Optional: Adjust font size
             fontWeight: FontWeight.bold,
           ),
@@ -86,7 +87,7 @@ class _SignUpPageUserState extends State<SignUpPageUser> {
                 decoration: InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
+                    borderSide: BorderSide(color: AppTheme.primaryColor),
                   ),
                   prefixIcon: Icon(Icons.email),
                 ),
@@ -98,7 +99,7 @@ class _SignUpPageUserState extends State<SignUpPageUser> {
                 decoration: InputDecoration(
                   labelText: 'Password',
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
+                    borderSide: BorderSide(color: AppTheme.primaryColor),
                   ),
                   prefixIcon: Icon(Icons.key),
                 ),
@@ -111,7 +112,7 @@ class _SignUpPageUserState extends State<SignUpPageUser> {
                 decoration: InputDecoration(
                   labelText: 'Name',
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
+                    borderSide: BorderSide(color: AppTheme.primaryColor),
                   ),
                   prefixIcon: Icon(Icons.person),
                 ),
@@ -124,7 +125,7 @@ class _SignUpPageUserState extends State<SignUpPageUser> {
                 decoration: InputDecoration(
                   labelText: 'Phone',
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
+                    borderSide: BorderSide(color: AppTheme.primaryColor),
                   ),
                   prefixIcon: Icon(Icons.phone),
                 ),
@@ -137,7 +138,7 @@ class _SignUpPageUserState extends State<SignUpPageUser> {
                 decoration: InputDecoration(
                   labelText: 'Age in years',
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
+                    borderSide: BorderSide(color: AppTheme.primaryColor),
                   ),
                   prefixIcon: Icon(Icons.cake),
                 ),
@@ -150,7 +151,7 @@ class _SignUpPageUserState extends State<SignUpPageUser> {
                 child: ElevatedButton(
                   onPressed: _signUp,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black, // Set the background color
+                    backgroundColor: AppTheme.primaryColor, // Set the background color
                   ),
                   child: const Text(
                     'Sign Up',

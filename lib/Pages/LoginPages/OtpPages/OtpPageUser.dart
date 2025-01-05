@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../../../Themes/appTheme.dart';
 import '../../../Utils/validationUtils.dart';
 
 class OtpPageUser extends StatefulWidget {
@@ -47,7 +48,7 @@ class _OtpPageUserState extends State<OtpPageUser> {
         title: Text(
           'Personal Account',
           style: TextStyle(
-            color: Colors.black, // Text color
+            color: AppTheme.primaryColor, // Text color
             fontSize: 30, // Optional: Adjust font size
             fontWeight: FontWeight.bold,
           ),
@@ -57,7 +58,7 @@ class _OtpPageUserState extends State<OtpPageUser> {
           bottom: 40,
           left: 20,
           child: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            icon: const Icon(Icons.arrow_back, color: AppTheme.primaryColor),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -84,7 +85,7 @@ class _OtpPageUserState extends State<OtpPageUser> {
               decoration: const InputDecoration(
                 labelText: 'OTP',
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: BorderSide(color: AppTheme.primaryColor),
                 ),
                 prefixIcon: Icon(Icons.phone),
               ),
@@ -97,7 +98,7 @@ class _OtpPageUserState extends State<OtpPageUser> {
               child: ElevatedButton(
                 onPressed: _verifyOtp,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black, // Set the background color
+                  backgroundColor: AppTheme.primaryColor, // Set the background color
                   shape: RoundedRectangleBorder(
                     borderRadius:
                     BorderRadius.circular(8.0), // Slightly rounded corners

@@ -1,26 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import '../../Themes/appTheme.dart';
 import '../../Utils/validationUtils.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-class UserPreferences {
-  static Future<void> saveUserDetails(int uId, int nbfcId, int nbfcP2PId) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('uId', uId);
-    await prefs.setInt('nbfcId', nbfcId);
-    await prefs.setInt('nbfcP2PId', nbfcP2PId);
-  }
-
-  static Future<Map<String, int?>> getUserDetails() async {
-    final prefs = await SharedPreferences.getInstance();
-    return {
-      'uId': prefs.getInt('uId'),
-      'nbfcId': prefs.getInt('nbfcId'),
-      'nbfcP2PId': prefs.getInt('nbfcP2PId'),
-    };
-  }
-}
 
 class SignupPageBusiness extends StatefulWidget {
   const SignupPageBusiness({super.key});
@@ -87,7 +69,7 @@ class _SignupPageBusinessState extends State<SignupPageBusiness> {
         title: Text(
           'Business Sign Up',
           style: TextStyle(
-            color: Colors.black, // Text color
+            color: AppTheme.primaryColor, // Text color
             fontSize: 30, // Optional: Adjust font size
             fontWeight: FontWeight.bold,
           ),
@@ -111,7 +93,7 @@ class _SignupPageBusinessState extends State<SignupPageBusiness> {
               decoration: InputDecoration(
                 labelText: 'Email',
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: BorderSide(color: AppTheme.primaryColor),
                 ),
                 prefixIcon: Icon(Icons.email),
               ),
@@ -123,7 +105,7 @@ class _SignupPageBusinessState extends State<SignupPageBusiness> {
               decoration: InputDecoration(
                 labelText: 'Password',
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: BorderSide(color: AppTheme.primaryColor),
                 ),
                 prefixIcon: Icon(Icons.key),
               ),
@@ -136,7 +118,7 @@ class _SignupPageBusinessState extends State<SignupPageBusiness> {
               decoration: InputDecoration(
                 labelText: 'Business Name',
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: BorderSide(color: AppTheme.primaryColor),
                 ),
                 prefixIcon: Icon(Icons.business),
               ),
@@ -149,7 +131,7 @@ class _SignupPageBusinessState extends State<SignupPageBusiness> {
               decoration: InputDecoration(
                 labelText: 'Phone',
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: BorderSide(color: AppTheme.primaryColor),
                 ),
                 prefixIcon: Icon(Icons.phone),
               ),
@@ -162,7 +144,7 @@ class _SignupPageBusinessState extends State<SignupPageBusiness> {
               decoration: InputDecoration(
                 labelText: 'Business Type',
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: BorderSide(color: AppTheme.primaryColor),
                 ),
                 prefixIcon: Icon(Icons.business_center),
               ),
@@ -175,7 +157,7 @@ class _SignupPageBusinessState extends State<SignupPageBusiness> {
               decoration: const InputDecoration(
                 labelText: 'Business Date of Incorporation',
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: BorderSide(color: AppTheme.primaryColor),
                 ),
                 hintText: 'YYYY-MM-DD',
                 prefixIcon: Icon(Icons.date_range),
@@ -189,7 +171,7 @@ class _SignupPageBusinessState extends State<SignupPageBusiness> {
               decoration: InputDecoration(
                 labelText: 'Business Capital',
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: BorderSide(color: AppTheme.primaryColor),
                 ),
                 prefixIcon: Icon(Icons.currency_rupee),
               ),
@@ -202,7 +184,7 @@ class _SignupPageBusinessState extends State<SignupPageBusiness> {
               child: ElevatedButton(
                 onPressed: _signUp,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black, // Set the background color
+                  backgroundColor: AppTheme.primaryColor, // Set the background color
                 ),
                 child: const Text(
                   'Sign Up',

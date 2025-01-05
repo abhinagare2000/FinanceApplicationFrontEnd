@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
+import '../../../Themes/appTheme.dart';
 import '../../SignUpPages/signup_page_business.dart';
 import '../../../Utils/validationUtils.dart';
 import 'package:http/http.dart' as http;
@@ -73,7 +74,7 @@ class _LoginPageBusinessEmailState extends State<LoginPageBusinessEmail> {
         title: Text(
           'Business Account',
           style: TextStyle(
-            color: Colors.black, // Text color
+            color: AppTheme.primaryColor, // Text color
             fontSize: 30, // Optional: Adjust font size
             fontWeight: FontWeight.bold,
           ),
@@ -119,7 +120,7 @@ class _LoginPageBusinessEmailState extends State<LoginPageBusinessEmail> {
                 labelText: 'Email',
                 prefixIcon: Icon(Icons.email),
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: BorderSide(color: AppTheme.primaryColor),
                 ),
               ),
               validator: validateEmail,
@@ -142,7 +143,7 @@ class _LoginPageBusinessEmailState extends State<LoginPageBusinessEmail> {
                   },
                 ),
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: BorderSide(color: AppTheme.primaryColor),
                 ),
               ),
               validator: validatePassword,
@@ -155,7 +156,7 @@ class _LoginPageBusinessEmailState extends State<LoginPageBusinessEmail> {
               onPressed: _login,
               style: ElevatedButton.styleFrom(
                 backgroundColor:
-                    Colors.black, // Set the background color
+                    AppTheme.primaryColor, // Set the background color
               ),
               child: const Text(
                 'Login',
@@ -181,7 +182,7 @@ class _LoginPageBusinessEmailState extends State<LoginPageBusinessEmail> {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor:
-                    Colors.black, // Set the background color
+                    AppTheme.primaryColor, // Set the background color
               ),
               child: const Text(
                 "Sign Up",
