@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'Pages/AccountPages/PersonalAccountPages/ClubPages.dart';
-import 'Pages/AccountPages/PersonalAccountPages/InsightPage.dart';
-import 'Pages/AccountPages/PersonalAccountPages/InvestPage.dart';
-import 'Pages/SelectionPages/account_selection_page.dart';
-import 'Pages/Component/ScrollablePages/mainScrollableViewPages.dart';
+// import 'Pages/AccountPages/PersonalAccountPages/ClubPages.dart';
+// import 'Pages/AccountPages/PersonalAccountPages/InsightPage.dart';
+// import 'Pages/AccountPages/PersonalAccountPages/InvestPage.dart';
+// import 'Pages/SelectionPages/account_selection_page.dart';
+// import 'Pages/Component/ScrollablePages/mainScrollableViewPages.dart';
+import 'Pages/AccountPages/BusinessAccountPages/ClubPages.dart';
 
 void main(){
   runApp(const MyApp());
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
       //     ),
       //   ),
       // ),
+      // home: ClubPages(),
       home: ClubPages(),
     );
   }
