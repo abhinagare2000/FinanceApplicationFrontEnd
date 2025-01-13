@@ -37,16 +37,16 @@ class _LoginPageUserMobileState extends State<LoginPageUserMobile> {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('OTP Sent!')),
           );
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => OtpPage(mobileNumber: mobile,accountStr: 'Personal Account',)),
+          );
         } else {
           // Handle error
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Failed to send OTP!')),
           );
         }
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => OtpPage(mobileNumber: mobile,)),
-        );
       }else {
         // Show an error message if the input is invalid
         ScaffoldMessenger.of(context).showSnackBar(

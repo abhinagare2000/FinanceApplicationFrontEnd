@@ -3,10 +3,12 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../../../Themes/appTheme.dart';
 import '../../../Utils/validationUtils.dart';
+import '../../../Pages/AccountPages/BusinessAccountPages/ClubPages.dart';
 
 class OtpPage extends StatefulWidget {
-  const OtpPage({super.key, required this.mobileNumber});
+  const OtpPage({super.key, required this.mobileNumber, required this.accountStr});
   final String mobileNumber;
+  final String accountStr;
   @override
   _OtpPageState createState() => _OtpPageState();
 }
@@ -33,6 +35,11 @@ class _OtpPageState extends State<OtpPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('OTP verified successfully!')),
       );
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ClubPages()),
+      );
     } else {
       // Handle error
       ScaffoldMessenger.of(context).showSnackBar(
@@ -46,7 +53,7 @@ class _OtpPageState extends State<OtpPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Business Account',
+          widget.accountStr,
           style: TextStyle(
             color: AppTheme.primaryColor, // Text color
             fontSize: 30, // Optional: Adjust font size

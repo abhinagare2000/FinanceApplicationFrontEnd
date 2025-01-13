@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../Themes/appTheme.dart';
+
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
@@ -75,7 +77,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   height: 8.0,
                   width: _currentPage == index ? 24.0 : 12.0,
                   decoration: BoxDecoration(
-                    color: _currentPage == index ? Colors.black : Colors.grey,
+                    color: _currentPage == index ? AppTheme.primaryColor : Colors.grey,
                     borderRadius: BorderRadius.circular(6.0),
                   ),
                 ),
@@ -138,7 +140,7 @@ class _ZoomPageState extends State<ZoomPage> {
             bottom: 40,
             left: 20,
             child: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.black),
+              icon: const Icon(Icons.arrow_back, color: AppTheme.primaryColor),
               onPressed: () {
                 Navigator.pop(context, _currentPage);
               },

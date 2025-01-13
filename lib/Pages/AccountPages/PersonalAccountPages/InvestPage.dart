@@ -36,15 +36,15 @@ class InvestScreen extends StatelessWidget {
             children: [
               _buildCategoryCard(
                 context,
-                'Invoice Discounting',
-                'Discounting of invoices for high returns',
-                Icons.description,
-              ),
-              _buildCategoryCard(
-                context,
                 'P2P Lending',
                 'Lend to businesses and earn interest',
                 Icons.group,
+              ),
+              _buildCategoryCard(
+                context,
+                'Invoice Discounting',
+                'Discounting of invoices for high returns',
+                Icons.description,
               ),
               _buildCategoryCard(
                 context,

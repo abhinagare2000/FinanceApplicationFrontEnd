@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'Pages/AccountPages/PersonalAccountPages/ClubPages.dart';
 // import 'Pages/AccountPages/PersonalAccountPages/InsightPage.dart';
 // import 'Pages/AccountPages/PersonalAccountPages/InvestPage.dart';
-// import 'Pages/SelectionPages/account_selection_page.dart';
-// import 'Pages/Component/ScrollablePages/mainScrollableViewPages.dart';
-import 'Pages/AccountPages/BusinessAccountPages/ClubPages.dart';
+import 'Pages/SelectionPages/account_selection_page.dart';
+import 'Pages/Component/ScrollablePages/mainScrollableViewPages.dart';
 
 void main(){
   runApp(const MyApp());
@@ -33,25 +31,25 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.light, // A light theme overall
         ),
       ),
-      // home: Scaffold(
-      //   body: Center(
-      //     child: Column(
-      //       mainAxisAlignment: MainAxisAlignment.center,
-      //       children: [
-      //         Flexible(
-      //           child: OnboardingScreen(),
-      //         ),
-      //         const SizedBox(height: 20),
-      //         SizedBox(
-      //           height: 80.0,  // Set the desired height
-      //           child: const AccountSelectionPage(),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
+      home: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Flexible(
+                child: OnboardingScreen(),
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                height: 80.0,  // Set the desired height
+                child: const AccountSelectionPage(),
+              ),
+            ],
+          ),
+        ),
+      ),
       // home: ClubPages(),
-      home: ClubPages(),
+      // home: ClubPages(),
     );
   }
 }

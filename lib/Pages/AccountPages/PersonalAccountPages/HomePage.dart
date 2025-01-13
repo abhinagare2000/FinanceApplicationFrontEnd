@@ -33,14 +33,16 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppTheme.primaryColor,
-        title: Text('Explore Investment Options', style: TextStyle(color: AppTheme.accentColor)),
+        title: Text('Explore Investment Options',
+            style: TextStyle(color: AppTheme.accentColor)),
         centerTitle: true,
         leading: Padding(
           padding: EdgeInsets.all(8), // Adjust padding if necessary
           child: Container(
             decoration: AppTheme.iconBackGroundDecoration,
             child: IconButton(
-              icon: Icon(Icons.explore_outlined, color: AppTheme.greenAccentColor), // Back arrow color
+              icon: Icon(Icons.explore_outlined,
+                  color: AppTheme.greenAccentColor), // Back arrow color
               onPressed: () {
                 Navigator.pop(context); // Handle back navigation
               },
@@ -49,7 +51,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.only(left: 8, right: 8, top: 6),
         child: SizedBox(
           child: ListView.builder(
             shrinkWrap: true,
@@ -84,7 +86,8 @@ class InvestmentCard extends StatelessWidget {
         ),
         child: Container(
           width: MediaQuery.of(context).size.width * 0.6,
-          height: MediaQuery.of(context).size.height * 0.18, // Adjust the height
+          height:
+              MediaQuery.of(context).size.height * 0.18, // Adjust the height
           margin: EdgeInsets.symmetric(horizontal: 6),
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -137,9 +140,24 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(option.title),
+        title: Text(option.title, style: TextStyle(color: Colors.white70)),
+        backgroundColor: AppTheme.primaryColor,
+        centerTitle: true,
+        leading: Padding(
+          padding: EdgeInsets.all(8), // Adjust padding if necessary
+          child: Container(
+            decoration: AppTheme.iconBackGroundDecoration,
+            child: IconButton(
+              icon: Icon(Icons.arrow_back,
+                  color: AppTheme.greenAccentColor), // Back arrow color
+              onPressed: () {
+                Navigator.pop(context); // Handle back navigation
+              },
+            ),
+          ),
+        ),
       ),
-      body: option.content,
+      body: Padding(padding: EdgeInsets.all(8), child: option.content),
     );
   }
 }
@@ -160,7 +178,7 @@ class InvestmentOption {
 
 class ContentSection extends StatelessWidget {
   final String title;
-  final String content;
+  final List<String> content;
 
   const ContentSection({super.key, required this.title, required this.content});
 
@@ -174,14 +192,18 @@ class ContentSection extends StatelessWidget {
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
+            color: AppTheme.primaryColor,
           ),
         ),
-        SizedBox(height: 8),
-        Text(
-          content,
-          style: TextStyle(fontSize: 16),
-        ),
-        SizedBox(height: 24),
+        SizedBox(height: 6),
+        ...content.map((item) => Row(
+          children: [
+            if (content.length > 1) Icon(Icons.check_circle, color: AppTheme.primaryColor, size: 20),
+            SizedBox(width: 8),
+            Expanded(child: Text(item, style: TextStyle(fontSize: 16))),
+          ],
+        )).toList(),
+        SizedBox(height: 16),
       ],
     );
   }
@@ -198,7 +220,11 @@ class ContentButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         minimumSize: Size(double.infinity, 50),
-        foregroundColor: Colors.black,
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0), // Slightly rounded corners
+        ),
+        backgroundColor: AppTheme.primaryColor, // Set the background color
       ),
       child: Text('Start Investing',
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
@@ -218,18 +244,27 @@ class P2PContent extends StatelessWidget {
         children: [
           ContentSection(
             title: 'What is P2P Lending?',
-            content:
-                'P2P lending enables direct lending to verified businesses through a platform. It cuts out traditional intermediaries, allowing for higher returns.',
+            content: [
+              'P2P lending enables direct lending to verified businesses through a platform. It cuts out traditional intermediaries, allowing for higher returns.',
+            ],
           ),
           ContentSection(
             title: 'Risks',
-            content:
-                '• Default risk from borrowers\n• Limited liquidity\n• Regulatory changes\n• Platform risk',
+            content: [
+              'Default risk from borrowers',
+              'Limited liquidity',
+              'Regulatory changes',
+              'Platform risk',
+            ],
           ),
           ContentSection(
             title: 'Why Invest?',
-            content:
-                '• Higher returns (12-18% p.a.)\n• Portfolio diversification\n• Monthly returns\n• Start with ₹10,000',
+            content: [
+              'Higher returns (12-18% p.a.)',
+              'Portfolio diversification',
+              'Monthly returns',
+              'Start with ₹10,000',
+            ],
           ),
           ContentButton(onPressed: () {}),
         ],
@@ -250,18 +285,27 @@ class InvoiceContent extends StatelessWidget {
         children: [
           ContentSection(
             title: 'What is Invoice Discounting?',
-            content:
-                'Invoice discounting lets you purchase verified invoices at a discount, earning returns when businesses pay their invoices.',
+            content: [
+              'Invoice discounting lets you purchase verified invoices at a discount, earning returns when businesses pay their invoices.',
+            ],
           ),
           ContentSection(
             title: 'Risks',
-            content:
-                '• Payment delays\n• Invoice authenticity\n• Business performance\n• Short-term nature',
+            content: [
+              'Payment delays',
+              'Invoice authenticity',
+              'Business performance',
+              'Short-term nature',
+            ],
           ),
           ContentSection(
             title: 'Why Invest?',
-            content:
-                '• Secured by invoices\n• Short duration (30-90 days)\n• Regular returns\n• Start with ₹50,000',
+            content: [
+              'Secured by invoices',
+              'Short duration (30-90 days)',
+              'Regular returns',
+              'Start with ₹50,000',
+            ],
           ),
           ContentButton(onPressed: () {}),
         ],
@@ -282,18 +326,27 @@ class NCDContent extends StatelessWidget {
         children: [
           ContentSection(
             title: 'What are NCDs?',
-            content:
-                'Non-Convertible Debentures are fixed-income instruments issued by corporations to raise funds, offering regular interest payments.',
+            content: [
+              'Non-Convertible Debentures are fixed-income instruments issued by corporations to raise funds, offering regular interest payments.',
+            ],
           ),
           ContentSection(
             title: 'Risks',
-            content:
-                '• Credit risk\n• Interest rate risk\n• Market liquidity\n• Company performance',
+            content: [
+              'Credit risk',
+              'Interest rate risk',
+              'Market liquidity',
+              'Company performance',
+            ],
           ),
           ContentSection(
             title: 'Why Invest?',
-            content:
-                '• Fixed returns\n• Regular interest payments\n• Higher than FD rates\n• Start with ₹10,000',
+            content: [
+              'Fixed returns',
+              'Regular interest payments',
+              'Higher than FD rates',
+              'Start with ₹10,000',
+            ],
           ),
           ContentButton(onPressed: () {}),
         ],

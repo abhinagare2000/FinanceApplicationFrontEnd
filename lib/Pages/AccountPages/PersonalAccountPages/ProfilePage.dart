@@ -1,6 +1,8 @@
+import 'package:financeapplication1/main.dart';
 import 'package:flutter/material.dart';
-
+import '../../../Pages/SelectionPages/account_selection_page.dart';
 import '../../../Themes/appTheme.dart';
+import '../../Component/ScrollablePages/mainScrollableViewPages.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -127,7 +129,26 @@ class ProfileScreen extends StatelessWidget {
               child: SizedBox(
                 width: 400,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Scaffold(
+                      body: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Flexible(
+                              child: OnboardingScreen(),
+                            ),
+                            const SizedBox(height: 20),
+                            SizedBox(
+                              height: 80.0,  // Set the desired height
+                              child: const AccountSelectionPage(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),),
+                  );},
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
                         AppTheme.primaryColor, // Set the background color

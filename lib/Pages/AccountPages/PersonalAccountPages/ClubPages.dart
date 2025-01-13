@@ -77,12 +77,12 @@ class _ClubPagesState extends State<ClubPages> {
   BottomNavigationBarItem _buildNavItem(IconData icon, String label, int index) {
     return BottomNavigationBarItem(
       icon: Stack(
-        alignment: Alignment.topCenter,
+        alignment: Alignment.center,
         children: [
           Icon(icon),
           // Add a small dot indicator for the selected item
           Container(
-            margin: const EdgeInsets.only(top: 24),
+            margin: const EdgeInsets.only(top: 25),
             width: 30,
             height: 3,
             decoration: BoxDecoration(

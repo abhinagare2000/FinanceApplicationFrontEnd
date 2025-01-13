@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../Themes/appTheme.dart';
+
 class PortfolioScreen extends StatelessWidget {
   const PortfolioScreen({super.key});
 
@@ -7,34 +9,31 @@ class PortfolioScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Investment Portfolio'),
-        backgroundColor: Color(0xFF264653),
+        title: const Text('Investment Portfolio',style: TextStyle(color: Colors.white70)),
+        backgroundColor: AppTheme.primaryColor,
+        centerTitle: true,
+        leading: Padding(
+          padding: EdgeInsets.all(8), // Adjust padding if necessary
+          child: Container(
+            decoration: AppTheme.iconBackGroundDecoration,
+            child: IconButton(
+              icon: Icon(Icons.candlestick_chart, color: AppTheme.greenAccentColor), // Back arrow color
+              onPressed: () {
+                Navigator.pop(context); // Handle back navigation
+              },
+            ),
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            const Text(
-              'Your Investments',
-              style: TextStyle(
-                color: Color(0xFF264653),
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 16),
             InvestmentCategory(
               category: 'P2P Lending',
               investments: [
-                InvestmentData('Platform A', '₹50,000'),
-                InvestmentData('Platform B', '₹30,000'),
-              ],
-            ),
-            InvestmentCategory(
-              category: 'NCD',
-              investments: [
-                InvestmentData('Company X', '₹75,000'),
-                InvestmentData('Company Y', '₹60,000'),
+                InvestmentData('Borrower Company Name 1', '₹50,000'),
+                InvestmentData('Borrower Company Name 2', '₹30,000'),
               ],
             ),
             InvestmentCategory(
@@ -42,6 +41,13 @@ class PortfolioScreen extends StatelessWidget {
               investments: [
                 InvestmentData('Vendor 1', '₹100,000'),
                 InvestmentData('Vendor 2', '₹45,000'),
+              ],
+            ),
+            InvestmentCategory(
+              category: 'NCD',
+              investments: [
+                InvestmentData('Company X', '₹75,000'),
+                InvestmentData('Company Y', '₹60,000'),
               ],
             ),
           ],
@@ -64,6 +70,7 @@ class InvestmentCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: AppTheme.primaryColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
@@ -77,9 +84,9 @@ class InvestmentCategory extends StatelessWidget {
             Text(
               category,
               style: const TextStyle(
-                fontSize: 20,
+                fontSize: 18,
+                color: Colors.white70,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF264653),
               ),
             ),
             const SizedBox(height: 8),
@@ -92,15 +99,15 @@ class InvestmentCategory extends StatelessWidget {
                     investment.name,
                     style: const TextStyle(
                       fontSize: 16,
-                      color: Colors.black,
+                      color: Colors.white70,
                     ),
                   ),
                   Text(
                     investment.amount,
                     style: const TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white70,
                     ),
                   ),
                 ],

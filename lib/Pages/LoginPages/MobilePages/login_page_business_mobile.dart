@@ -5,6 +5,7 @@ import '../OtpPages/OtpPageBusiness.dart';
 import '../../SignUpPages/signup_page_business.dart';
 import '../../LoginPages/EmailPasswordPages/login_page_business_email.dart';
 import '../../../Utils/validationUtils.dart';
+import '../../../Pages/AccountPages/BusinessAccountPages/ClubPages.dart';
 import 'package:http/http.dart' as http;
 
 class LoginPageBusinessMobile extends StatefulWidget {
@@ -38,19 +39,20 @@ class _LoginPageBusinessMobileState extends State<LoginPageBusinessMobile> {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('OTP Sent!')),
           );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => OtpPage(
+                  mobileNumber: mobile,
+                  accountStr: 'Business Account',
+                )),
+          );
         } else {
           // Handle error
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Failed to send OTP!')),
           );
         }
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => OtpPage(
-                    mobileNumber: mobile,
-                  )),
-        );
       } else {
         // Show an error message if the input is invalid
         ScaffoldMessenger.of(context).showSnackBar(

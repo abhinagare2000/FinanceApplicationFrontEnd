@@ -10,19 +10,19 @@ class HomeScreen extends StatelessWidget {
     BorrowingOption(
       title: 'P2P',
       description: 'Borrow from verified lenders',
-      interestRate: '12-18% p.a.',
+      interestRate: '18-24% p.a.',
       content: P2PContent(),
     ),
     BorrowingOption(
       title: 'Invoice Discounting',
       description: 'Finance your invoices',
-      interestRate: '10-14% p.a.',
+      interestRate: '14-20% p.a.',
       content: InvoiceContent(),
     ),
     BorrowingOption(
       title: 'NCDs',
       description: 'Raise funds through corporate bonds',
-      interestRate: '8-12% p.a.',
+      interestRate: '12-18% p.a.',
       content: NCDContent(),
     ),
   ];
@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppTheme.primaryColor,
-        title: Text('Explore Borrowing Options', style: TextStyle(color: AppTheme.accentColor)),
+        title: Text('Explore Borrowing Options', style: TextStyle(color: AppTheme.textColor)),
         centerTitle: true,
         leading: Padding(
           padding: EdgeInsets.all(8), // Adjust padding if necessary
@@ -72,20 +72,35 @@ class P2PContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'P2P Lending Details',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 10),
-        Text(
-          'Borrow from verified lenders through P2P platforms. This option allows businesses to access funds quickly with competitive interest rates.',
-          style: TextStyle(fontSize: 16),
-        ),
-        // Add more details or widgets as needed
-      ],
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ContentSection(
+            title: 'P2P',
+            content: [
+              'Borrow from verified lenders through a peer-to-peer lending platform.',
+            ],
+          ),
+          ContentSection(
+            title: 'Interest Rate',
+            content: [
+              '18-24% p.a.',
+            ],
+          ),
+          ContentSection(
+            title: 'Why Borrow?',
+            content: [
+              'Quick access to funds',
+              'Competitive interest rates',
+              'Flexible terms',
+              'No collateral required',
+            ],
+          ),
+          ContentButton(onPressed: () {}),
+        ],
+      ),
     );
   }
 }
@@ -95,20 +110,35 @@ class InvoiceContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Invoice Discounting Details',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 10),
-        Text(
-          'Finance your invoices by selling them to a third party at a discount. This option helps businesses improve cash flow by getting immediate funds.',
-          style: TextStyle(fontSize: 16),
-        ),
-        // Add more details or widgets as needed
-      ],
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ContentSection(
+            title: 'Invoice Discounting',
+            content: [
+              'Finance your invoices to improve cash flow and working capital. It allows you to borrow against your unpaid invoices.',
+            ],
+          ),
+          ContentSection(
+            title: 'Interest Rate',
+            content: [
+              '14-20% p.a.',
+            ],
+          ),
+          ContentSection(
+            title: 'Why Borrow?',
+            content: [
+              'Immediate cash flow',
+              'No collateral required',
+              'Improves working capital',
+              'Flexible terms',
+            ],
+          ),
+          ContentButton(onPressed: () {}),
+        ],
+      ),
     );
   }
 }
@@ -118,20 +148,91 @@ class NCDContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ContentSection(
+            title: 'NCDs',
+            content: [
+              'Raise funds through corporate bonds',
+            ],
+          ),
+          ContentSection(
+            title: 'Interest Rate',
+            content: [
+              '12-18% p.a.',
+            ],
+          ),
+          ContentSection(
+            title: 'Why Borrow?',
+            content: [
+              'Access to large funds',
+              'Fixed interest rates',
+              'Longer repayment terms',
+              'No dilution of ownership',
+            ],
+          ),
+          ContentButton(onPressed: () {}),
+        ],
+      ),
+    );
+  }
+}
+
+class ContentSection extends StatelessWidget {
+  final String title;
+  final List<String> content;
+
+  const ContentSection({super.key, required this.title, required this.content});
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'NCD Details',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          title,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: AppTheme.primaryColor,
+          ),
         ),
-        const SizedBox(height: 10),
-        Text(
-          'Raise funds through Non-Convertible Debentures (NCDs). This option allows businesses to issue bonds to investors and pay interest over time.',
-          style: TextStyle(fontSize: 16),
-        ),
-        // Add more details or widgets as needed
+        SizedBox(height: 6),
+        ...content.map((item) => Row(
+          children: [
+            if (content.length > 1) Icon(Icons.check_circle, color: AppTheme.primaryColor, size: 20),
+            SizedBox(width: 8),
+            Expanded(child: Text(item, style: TextStyle(fontSize: 16))),
+          ],
+        )).toList(),
+        SizedBox(height: 16),
       ],
+    );
+  }
+}
+
+class ContentButton extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  const ContentButton({super.key, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size(double.infinity, 50),
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0), // Slightly rounded corners
+        ),
+        backgroundColor: AppTheme.primaryColor, // Set the background color
+      ),
+      child: Text('Borrow Now',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
     );
   }
 }
@@ -218,33 +319,27 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(option.title),
+        title: Text(option.title, style: TextStyle(color: AppTheme.textColor)),
         backgroundColor: AppTheme.primaryColor,
+        centerTitle: true,
+        leading: Padding(
+          padding: EdgeInsets.all(8), // Adjust padding if necessary
+          child: Container(
+            decoration: AppTheme.iconBackGroundDecoration,
+            child: IconButton(
+              icon: Icon(Icons.arrow_back, color: AppTheme.greenAccentColor), // Back arrow color
+              onPressed: () {
+                Navigator.pop(context); // Handle back navigation
+              },
+            ),
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              option.title,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: AppTheme.primaryColor,
-              ),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              option.description,
-              style: TextStyle(fontSize: 16, color: Colors.black54),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Interest Rate: ${option.interestRate}',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(height: 16),
             Expanded(child: option.content),
           ],
         ),

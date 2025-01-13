@@ -67,7 +67,7 @@ class _GrowthPlanScreenState extends State<GrowthPlanScreen> {
             decoration: AppTheme.iconBackGroundDecoration,
             child: IconButton(
               icon: Icon(Icons.arrow_back,
-                  color: AppTheme.accentColor), // Back arrow color
+                  color: AppTheme.greenAccentColor), // Back arrow color
               onPressed: () {
                 Navigator.pop(context); // Handle back navigation
               },
@@ -262,7 +262,7 @@ class _GrowthPlanScreenState extends State<GrowthPlanScreen> {
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
-          Icon(icon, color: Colors.green),
+          Icon(icon, color: AppTheme.primaryColor),
           SizedBox(width: 16),
           Expanded(
             child: Text(

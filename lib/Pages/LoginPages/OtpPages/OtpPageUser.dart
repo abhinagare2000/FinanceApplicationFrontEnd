@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../../../Themes/appTheme.dart';
 import '../../../Utils/validationUtils.dart';
+import '../../../Pages/AccountPages/PersonalAccountPages/ClubPages.dart';
 
 class OtpPageUser extends StatefulWidget {
   const OtpPageUser({super.key, required this.mobileNumber});
@@ -32,6 +33,10 @@ class _OtpPageUserState extends State<OtpPageUser> {
       // Handle success
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('OTP verified successfully!')),
+      );
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ClubPages()),
       );
     } else {
       // Handle error
